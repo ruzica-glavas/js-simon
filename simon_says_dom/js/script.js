@@ -6,68 +6,72 @@ const answersForm= document.getElementById(`answers-form`)
 const inputGroup= document.getElementById(`input-group`)
 const message= document.getElementById (`message"`)
 
-//Elementi che mi serviranno per i numeri randomici e il timer
-
-let randomNumbers=[];
-let timerSeconds= 30;
 
 //Funzione per numeri randomici
+const numbers= [];
 
-function getRadomNumbers(){
-    const numbers= [];
-
-    for(i=0; numbers.size<5; i++){
-        
-       const num= Math.floor(Math.random()*50)+1
-        /*if(!numbers.includes(num)){
-            numbers.push(num);
-        }*/
-    }
-    return numbers
+function getRandomNumbers(min, max){
+    return Math.floor(Math.random()*max)+min
 }
 
-//Mostrare i numeri nella pagina
+//Controllo che i numeri non si ripetano
 
-function displayNumbers(numbers) {
-    numbersList.innerHTML="";
-    for(let i=0; i<numbers.length; i++){
-        const num=numbers[i]
+    for(let i=0; numbers.length<5; i++){
 
-        console.log(num)
+        let numRandom= getRandomNumbers(1,50)
 
-        const li = document.createElement("li");
-        li.textContent = num; // Imposta il testo dell'elemento
-        numbersList.appendChild(li);
-    }
+        if(!numbers.includes(numRandom)){
+            numbers.push(numRandom)
+       
+        } 
     
-}
+        console.log(numbers) // 5 numeri randomici sono stati stampati in console
+    }
 
-
-//Funzione per il countdown
-
-function startCountdown(){
-
-    countdown.innerHTML=timeLeft;
-    const interval=setInterval(()=>{
-
-        timeLeft--
+//Far comparire i numeri in pagina
     
-     countdown.innerHTML=timeLeft;
+    for(let i=0; i<numbers.length; i++ ){
+        numbersList.innerHTML+=`<li>${numbers[i]}</li>` //i numeri compaiono in pagina
+    }
 
-    })
 
-if(timeLeft===0){
-    clearInterval(interval);
-    numbersList.innerHTML="";
-    instructions.innerHTML="Inserisci i numeri che ti sei ricordato"
-    answersForm.classList.remove();
+//Funzione temporale per mettere il limite di 30sec (per il countdown)
+
+let countdownTime=3
+const timer = setInterval(function(){
+    countdown.innerHTML= countdownTime--
+
+    //Mettere una codizione if per far fermare il countdown a zero
+    if(countdownTime<0){
+    clearInterval (timer)
+    answersForm.classList.remove(`d-none`)
+    numbersList.classList.add(`d-none`)
+    instructions.classList.add (`d-none`)
+    countdown.classList.add(`d-none`)
 }
 
-}
+}, 1000)
+
+
+//Controllo dei risultati
+
+const btnConferma= document.querySelector(`.btn-primary`)
+const formControl= document.querySelectorAll(`.form-control`)
+
+console.log(formControl)
+
+btnConferma.addEventListener(`click`, function (event){
+event.preventDefault
+
+  
+
+})
+
+
 
 //Funzione per il controllo delle risposte
 
-answersForm.addEventListener("submit", (event)=>{
+/*answersForm.addEventListener("submit", (event)=>{
 
     event.preventDefault();
 
@@ -75,6 +79,6 @@ answersForm.addEventListener("submit", (event)=>{
 
 
 
-})
+})*/
 
 
