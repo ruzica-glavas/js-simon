@@ -4,7 +4,7 @@ const instructions= document.getElementById(`instructions`)
 const numbersList= document.getElementById(`numbers-list`)
 const answersForm= document.getElementById(`answers-form`)
 const inputGroup= document.getElementById(`input-group`)
-const message= document.getElementById (`message"`)
+const message= document.getElementById (`message`)
 
 
 //Funzione per numeri randomici
@@ -53,32 +53,36 @@ const timer = setInterval(function(){
 }, 1000)
 
 
-//Controllo dei risultati
+//Controllo dei risultati che inserisce l'utente
 
 const btnConferma= document.querySelector(`.btn-primary`)
 const formControl= document.querySelectorAll(`.form-control`)
+const numUtenteCorretto = []
+
 
 console.log(formControl)
 
 btnConferma.addEventListener(`click`, function (event){
-event.preventDefault
+event.preventDefault()
 
-  
+    for(let i=0; i<formControl.length; i++){
+
+    if(numbers.includes(parseInt(formControl[i].value))){ //Confronto dei risultati che ha inserito l'utente con i numeri randomici
+        numUtenteCorretto.push((formControl[i].value))
+    }
+}
+
+    message.innerHTML=`Complimenti hai indovinato ${numUtenteCorretto.length} numero/i e sono: ${numUtenteCorretto.join(",")}`
+
+    console.log(numUtenteCorretto)
 
 })
 
 
 
-//Funzione per il controllo delle risposte
-
-/*answersForm.addEventListener("submit", (event)=>{
-
-    event.preventDefault();
-
-    
 
 
 
-})*/
+
 
 
