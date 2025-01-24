@@ -37,7 +37,7 @@ function getRandomNumbers(min, max){
 
 //Funzione temporale per mettere il limite di 30sec (per il countdown)
 
-let countdownTime=3
+let countdownTime=30
 const timer = setInterval(function(){
     countdown.innerHTML= countdownTime--
 
